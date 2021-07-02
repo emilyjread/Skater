@@ -1,0 +1,96 @@
+*{
+    margin:0;
+    padding: 0;
+    /* outline: 1px solid pink; */
+}
+
+#container{
+    width: 1000px;
+    height: 650px;
+}
+
+section{
+    width: 1000px;
+    height: 650px;
+    background-image: linear-gradient(to right, red,orange,yellow,green,blue,indigo,violet, red);
+    background-image: url("img/starry_sky.jpeg");
+    background-image: url("img/ocean3.jpg");
+    /* background-repeat: no-repeat;
+    background-size: cover; */
+    /* z-index: 1; */
+}
+
+.birds{
+    /* background-image: url("img/flying_bird.gif"); */
+    transform: scaleX(-1);
+    height: 200px;
+    width: 600px;
+    position: absolute;
+    top: 0;
+    /* z-index: 2; */
+    filter: invert(100%)
+}
+
+#ground{
+    position: relative;
+    top: 600px;
+    height: 80px;
+    width: 1000px;
+    background-image: url("img/moon_long.png");
+    background-image: url("img/floor_long.png");
+    /* z-index: 2; */
+    /* align-self: flex-end; */
+}
+
+#character{
+    height: 200px;
+    width: 150px;
+    background-image: url("img/guy_down.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* z-index: 3; */
+    position: relative;
+    top: 350px;
+    left: 100px;
+    transition: top 2s
+}
+
+.obstacle{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    position: relative;
+    left: 905px;
+    top: 250px;
+    /* z-index: 3; */
+    /* background-image: url("img/rover.png"); */
+    background-image: url("img/jelly.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+#buttons{
+    position: absolute;
+    top: 100px;
+    left: 1000px;
+    height: 600px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+}
+
+button{
+    height: 100px;
+    width: 100px;
+    background-color: black;
+    color: white;
+    box-shadow: 2px 2px white;
+}
+
+#gameover{
+    background-color: black;
+    color: white;
+    font-size: 32px;
+    text-align: center;
+    padding: 300px;
+}
