@@ -13,7 +13,10 @@
 <!-- background -->
         <section>
         <!-- sky -->
-                <div class="birds"></div>
+                <div id="sky">
+                        <div class="coin"></div>
+                </div>
+                
         <!-- ground -->
                 <div id="ground"></div>
         <!-- character -->
@@ -23,16 +26,18 @@
                 <div class="obstacle"></div>
 
         </section>
-</div>
+        </div>
         <div id="buttons">
+                <div id="score">
+                        <img src="img/coin.png" alt="total coins"> 
+                        <div id="score-num">0</div>
+                </div>
                 <button value="0" onclick="updateBackground(0)">Moon</button>
                 <button value="1" onclick="updateBackground(1)">Underwater</button>
                 <button value="2" onclick="updateBackground(2)">Rainbow</button>
         </div>
-   
-
-  
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="script.js" ></script>
+ 
+        <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+        <script src="script.js" ></script>
 </body>
 </html>

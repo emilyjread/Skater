@@ -6,24 +6,27 @@ var skyArr = [];
 
 var doc= document.querySelector("#container")
 var container = $("#container").html()
-console.log(container)
 
 function updateBackground(input){
     $('section').css('background-image', backgroundArr[input]);
     $('#ground').css('background-image', groundArr[input]);
     $('.obstacle').css('background-image', obArr[input]);
+
+    $('.obstacle').css('left', 900);
+
     var checkContainer = $("#container").html()
     if (checkContainer="<h1 id='gameover'>Game Over</h1>"){
         $("#container").html(container)
         $('section').css('background-image', backgroundArr[input]);
         $('#ground').css('background-image', groundArr[input]);
         $('.obstacle').css('background-image', obArr[input]);
+        $("#score-num").html("0")
+        score=0
     }
-    
 }
 
-
 // MOVE BACKGROUND
+
 $(function(){
     var move =0;
     setInterval(function(){
@@ -31,7 +34,6 @@ $(function(){
         $('section').css('background-position', move+'px');
     })
 })
-
 
 //MOVE GROUND
 
@@ -44,78 +46,83 @@ $(function(){
 })
 
 //CHECK FOR COLLISION
+var score=0
+
+function removeCoin(){
+    var left =1000;
+    $('.coin').css('left', (left-1.5) +'px');
+
+}
+
 
 function collisionCheck(){
     var charLeft = parseInt($('#character').css('left'))+100;
-    var obstacleLeft = parseInt($('.obstacle').css('left'));
     var charTop = parseInt($('#character').css('top'));
+
+    var obstacleLeft = parseInt($('.obstacle').css('left'));
     var obstacleTop = parseInt($('.obstacle').css('top'));
+
+    var coinLeft = parseInt($('.coin').css('left'));
+    var coinTop = parseInt($('.coin').css('top'));
+
 
 
     if (charLeft==obstacleLeft+50 && charTop>=obstacleTop){
         $("#container").html("<h1 id='gameover'>Game Over</h1>")
+        score=0
+    }
+    if (charLeft==coinLeft+50 && charTop+150>=coinTop){
+        score+=1
+        console.log("collided")
+        $("#score-num").text(score)
+        // $('.coin').css("background-position", "1000px");
+        removeCoin()
     }
 }
 collisionCheck()
 
-//MOVE OBSTACLE, CHECK FOR COLLISION
+//MOVE OBSTACLE CALL COLLISION FUNCTION
 
 $(function(){
     var left =1000;
     setInterval(function(){
         left-=1;
         $('.obstacle').css('left', left+'px');
+        // $('.coin').css('left', (left*1.5) +'px');
         if(left<=-100){
-            left=950
-            
+            left+=Math.floor(Math.random()*450+550)
+        }
+        collisionCheck()
+    })
+    
+})
+//MOVE COIN, CALL COLLISION FUNCTION
+
+$(function(){
+    var left =600;
+    setInterval(function(){
+        left-=1;
+        // $('.obstacle').css('left', left+'px');
+        $('.coin').css('left', (left*1.75) +'px');
+        if(left<=-100){
+            left=600
         }
         collisionCheck()
     })
     
 })
 
-//CREATE OBSTACLE
-// var obstacleArr=[]
-// var obstacle= "<div class='obstacle'></div>"
-// function createObstacle(){
-//     var obstacle= "<div class='obstacle' style='left: 900px;'></div>"
-//     document.querySelector("#obstacles").innerHTML+=obstacle
-// }
-// setInterval(createObstacle(), 800);
-// $(function(){
-//     var left =0;
-//     setInterval(function(){
-//         left-=.05;
-//         $('#ground').css('background-position', left+'px');
-//     })
-// })
-
-
-// function createObstacle(){
-//     var obstacle= "<div class='obstacle'></div>"
-//     document.querySelector("#ground").innerHTML+=obstacle
-// }
-// setInterval(createObstacle(), 2000)
-
-// $(function(){
-//     var obstacle= "<div class='obstacle'></div>"
-//     setInterval(function(){
-//         $('#obstacles').append(obstacle);
-//     })
-// })
-
 //GUY JUMPING
 document.onkeydown = function(e){
     if (e.keyCode == 38) {
-        console.log("this is working")
         var url= "url('img/guy_up.png')"
-        var height = 200
+        var height = 150
         
         function jump(){
         $("#character").css('backgroundImage', url);
-        $("#character").css('top', height+"px");
-        
+        $("#character").css('top', height+"px");      
         }
+        
         jump()
 
         url= "url('img/guy_down.png')"
@@ -128,11 +135,15 @@ document.onkeydown = function(e){
 
 
 
+
+
+
 //to do
 
 //add sky variables
-//fix images
+//obstacle reset
 //make random obstacles
-//make buttons reset game
-//make points
-//keep score
+//make coins disappear
+//add timer at the top
+//add game over stats
+//refactor and clean up code
